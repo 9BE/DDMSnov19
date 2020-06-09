@@ -96,5 +96,10 @@
 			<type>2</type>
 			<location>/home/suhaimi/Arduino/hardware/espressif/esp32/libraries/Wire</location>
 		</link>
+		<link>
+			<name>libraries/simplot</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/simplot/1.0.2</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

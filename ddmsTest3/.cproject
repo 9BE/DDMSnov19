@@ -33,6 +33,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/Wire/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/FreeRTOS/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/ArduinoJson/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/simplot}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.831076095" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -52,6 +53,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/Wire/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/FreeRTOS/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/ArduinoJson/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/simplot}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.904384348" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -71,6 +73,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/Wire/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/FreeRTOS/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/ArduinoJson/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ddmsTest3/libraries/simplot}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.945941196" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>

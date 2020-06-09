@@ -48,4 +48,5 @@ libraries/WebServer/src \
 libraries/WebServer/src/detail \
 libraries/WiFi/src \
 libraries/Wire/src \
+libraries/simplot \
 

@@ -135,6 +135,7 @@ void setupWiFi(void)
     wifiMulti.addAP("GF_Wifi_2.4GHz", "Gr33nF1nd3r2018");
     wifiMulti.addAP("AndroidAP", "efdx6532");
     wifiMulti.addAP("Realme 2", "12345678");
+    wifiMulti.addAP("GF-Technical-2.4Ghz", "gr33nf1nd3r");
 
     enterLine("Connecting Wifi...");
     if(wifiMulti.run() == WL_CONNECTED) {
@@ -220,7 +221,7 @@ void setupWiFi(void)
 
 
 	server.begin(80);                  //Start server
-	MDNS.begin("nine");
+	MDNS.begin("nine_ddms");
 	hantu("HTTP server started");
 
 	String wifiMod = "WiFi enabled     ";

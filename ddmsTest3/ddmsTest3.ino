@@ -1,6 +1,16 @@
 #include "Arduino.h"
 #include "all.h"
 
+// ++ v6 ++
+#include "LocSonar.h"
+
+LocSonar	* _oSonar;
+
+void connectSonarCaraHisto();
+
+extern unsigned long lastSonarSerial;
+// ++ v6 habis ++
+
 #define tickInterval 1000
 #define DEBUG true
 
@@ -70,7 +80,7 @@ void setup()
 // Add your initialization code here
 
 
-	Serial.begin(115200);
+	Serial.begin(9600);
 	Serial.println("MULAI . . . . .");
 
 	waitDone = false;
@@ -119,8 +129,8 @@ void setup()
 //	jsonHandler->mGroup = spiffsHandler->readFromSpiffs("g");
 
 
-	esp_task_wdt_init(60, true);
-	enableLoopWDT();
+	esp_task_wdt_init(180, true);
+//	enableLoopWDT();
 
 	esp_task_wdt_add(Task1);
 	esp_task_wdt_add(Task0);
@@ -140,6 +150,12 @@ void setup()
 	SelectPort(none0);
 	SelectPort(portWidelink);
 
+	// ++ v6 ++
+
+	_oSonar = new LocSonar(1, 10, &Serial, Ais.max, Ais.min);
+
+	// ++ v6 habis ++
+
 
 //	digitalWrite(pOutOnHopper, HIGH);
 
@@ -157,6 +173,8 @@ void loop()
 		if (!tidur) GPSGap++;
 		localDateTime(&now, unix, 8);
 	}
+
+//	runOnPowered();
 
 	if (Ais.mainPower) {
 		runOnPowered();
@@ -215,7 +233,8 @@ void runOnBattery()
 
 				if (Ais.sonarCount) {
 					nakDebug += "s,";
-					connectSonar();
+//					connectSonar();
+					connectSonarCaraHisto();
 					lastSonarRead = unix;
 
 					delay(1000);
@@ -258,12 +277,14 @@ void runOnPowered()
 {
 	if (!freshBat) nakDebug = "";
 
-	if (unix - sensorTime >= 10) {
+	if (unix - sensorTime >= 20) {
 		if (Ais.sonarCount) {
-			sensorTime = unix;
+
 			nakDebug += "s,";
-			connectSonar();
+//			connectSonar();
+			connectSonarCaraHisto();
 			lastSonarRead = unix;
+			sensorTime = unix;
 		}
 
 		if (Ais.hopperCount) {
@@ -507,5 +528,58 @@ void hantu(String txt)
 	waitDone = true;
 #endif
 }
+
+// ++ v6 ++
+inline void connectSonarCaraHisto() {
+
+	log_i("Connect SONAR at %d", millis()/1000UL);
+
+	digitalWrite(pLEDStatus, HIGH);
+	SelectPort(portSonar);
+
+	_oSonar->setEnable(true);
+
+	uint8_t kira = 0;
+
+	Timer.test();
+	if (Timer.tock) {
+		Timer.tock = 0;
+		unix++;
+		if (!tidur) GPSGap++;
+		localDateTime(&now, unix, 8);
+	}
+
+	while (1) {
+
+		kira++;
+		delay(1000);
+		if (_oSonar->isDone()) break;
+		if (kira == 10) break;
+
+		Timer.test();
+		if (Timer.tock) {
+			Timer.tock = 0;
+			unix++;
+			if (!tidur) GPSGap++;
+			localDateTime(&now, unix, 8);
+		}
+	}
+
+	_oSonar->setEnable(false);
+
+	nakDebugSonar = _oSonar->getDebugSOnar();
+	Ais.actual = (int) _oSonar->getSonarDistance();
+	lastSonarSerial = _oSonar->getMasaSonarSerial();
+
+	digitalWrite(pLEDStatus, LOW);
+	SelectPort(portWidelink);
+
+	log_i("Disconnect SONAR at %d", millis()/1000UL);
+
+
+}
+// ++ v6 habis ++
+
+
 
 

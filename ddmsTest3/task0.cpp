@@ -250,7 +250,7 @@ void titleFrame(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
 
 	String txt = "";
 
-	txt = "SPMS V5.0";
+	txt = "SPMS V6.0";
 	display->setTextAlignment(TEXT_ALIGN_CENTER);
 	display->setFont(ArialMT_Plain_24);
 	display->drawString(clockCenterX + x , clockCenterY/2 + y, txt );
@@ -323,14 +323,14 @@ bool DoorClose()
 		Ais.open = 0;
 		freshOpen = true;
 
-//		if (freshClose) {
-//			freshClose = false;
-//			WiFi.softAPdisconnect(true);
-//			WiFi.disconnect(0, 0);
-//			server.stop();
-//			displayProceedFlag = false;
-//			bye();
-//		}
+		if (freshClose) {
+			freshClose = false;
+			WiFi.softAPdisconnect(true);
+			WiFi.disconnect(0, 0);
+			server.stop();
+			displayProceedFlag = false;
+			bye();
+		}
 
 	}
 	else{

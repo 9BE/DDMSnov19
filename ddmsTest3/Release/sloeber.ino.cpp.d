@@ -211,7 +211,9 @@ sloeber.ino.cpp.o: ../sloeber.ino.cpp \
  /home/suhaimi/Arduino/hardware/espressif/esp32/libraries/SPIFFS/src/SPIFFS.h \
  /home/suhaimi/Arduino/hardware/espressif/esp32/libraries/FS/src/FS.h \
  /home/suhaimi/Arduino/hardware/espressif/esp32/tools/sdk/include/esp32/esp_task_wdt.h \
- ../task1.h ../timer.h ../ddmsTest3.ino
+ ../task1.h ../timer.h ../LocSonar.h ../digitalize.h ../graph.h \
+ /media/suhaimi/HDD/eclipse/sloeber/arduinoPlugin/libraries/simplot/1.0.2/simplot.h \
+ ../ddmsTest3.ino
 
 /home/suhaimi/Arduino/hardware/espressif/esp32/cores/esp32/Arduino.h:
 
@@ -652,5 +654,13 @@ sloeber.ino.cpp.o: ../sloeber.ino.cpp \
 ../task1.h:
 
 ../timer.h:
+
+../LocSonar.h:
+
+../digitalize.h:
+
+../graph.h:
+
+/media/suhaimi/HDD/eclipse/sloeber/arduinoPlugin/libraries/simplot/1.0.2/simplot.h:
 
 ../ddmsTest3.ino:

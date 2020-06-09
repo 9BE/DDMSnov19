@@ -40,17 +40,28 @@ void ReadSerial(void)
 	bool ada=false;
 
 	while(Serial.available() > 0){
-		cR = Serial.read();
+
 		if(task == "Sonar"){
 
-			if(isAlphaNumeric(cR)){
-				receiveText.concat(cR);
-				lastSonarSerial = unix;
-			}
+//			if(isAlphaNumeric(cR)){
+//				receiveText.concat(cR);
+//				lastSonarSerial = unix;
+//			}
 		}
 		else{
-			receiveText.concat(cR);
+			cR = Serial.read();
+			if (cR >= 32 && cR <= 126) {
+				receiveText.concat(cR);
+			}
+
+			if (cR == 13) {
+				receiveText.concat(cR);
+			}
+
+//			nmea.concat(cR);
 			if(cR == '\n'){
+//				nmea += receiveText;
+//				nmea += "</br>";
 				lastAisSerial = unix;
 				ada=true;
 			}
@@ -71,14 +82,24 @@ void ReadSerial(void)
 			z = receiveText.indexOf('*',z);
 			start = getSmallestValidNumber(x, y);
 			if(start >= 0){
-				end = receiveText.indexOf('\n',start);
+//				end = receiveText.indexOf('\n',start);
+				z = receiveText.indexOf('*',start);
+				end = -1;
+				if (z >= 0) {
+					end = z + 3;
+					if (end >= receiveText.length()) {
+						end = -1;
+					}
+				}
+
 				if(end >= 0){
-					temp = receiveText.substring(start,end-1);
+					temp = receiveText.substring(start,end);
+					nmea += temp + "</br>";
 					if(Ais.validate(temp)){
 						esp_task_wdt_reset();
 						readyToSend = true;
 						if(IntrestInfo(temp)){
-							nmea += temp + "</br>";
+//							nmea += temp + "</br>";
 						}
 					}
 					else{
@@ -223,6 +244,8 @@ void codeForTask1(void * parameter)
 		nakDebug1 += String(xPortGetCoreID());
 		nakDebug1 += " at ";
 		nakDebug1 += millis();
+
+		esp_task_wdt_reset();
 
 
 		delay(10);

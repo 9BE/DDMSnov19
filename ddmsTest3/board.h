@@ -12,8 +12,8 @@
 #include	<WiFi.h>
 #include "han.h"
 
-#define pOutOnHopper 25
-#define pOutOnSonar 32
+#define pOutOnHopper 32		// v5->25 v6->32
+#define pOutOnSonar 25  	// v5->32 v6->25
 #define pOutOnWideLink 33
 
 #define pOutDRes 21
